@@ -2,6 +2,7 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,11 +11,20 @@ public class Main {
         String filePath = "src\\Jingle Bells - The Soundlings.wav";
         File file = new File(filePath);
 
-        try(AudioInputStream audioStream = AudioSystem.getAudioInputStream(file)){
+        try(Scanner scanner = new Scanner(System.in);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file)){
+
+
 
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
-            System.out.println("No problems were detected!");
+
+            String response = "";
+
+            while(!response.equals("Q")){
+                System.out.println("P = Play");
+            }
+
         }
         catch(FileNotFoundException e){
             System.out.println("Audio file not found!");
@@ -27,6 +37,10 @@ public class Main {
         }
         catch(IOException e){
             System.out.println("Something went wrong!");
+        }
+        finally{
+            System.out.println("Bye!");
+            scanner.close();
         }
     }
 }
