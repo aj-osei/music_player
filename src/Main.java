@@ -19,18 +19,25 @@ public class Main {
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
 
-            clip.start();
 
             String response = "";
 
             while(!response.equals("Q")){
                 System.out.println("P = Play");
                 System.out.println("S = Stop");
-                System.out.println("R = Resume");
+                System.out.println("R = Reset");
                 System.out.println("Q = Quit");
                 System.out.print("Enter your choice: ");
 
                 response = scanner.next().toUpperCase();
+
+                switch(response){
+                    case "P" -> clip.start();
+                    case "S" -> clip.stop();
+                    case "R" -> clip.setMicrosecondPosition(0);
+                    case "Q" -> clip.close();
+                    default -> System.out.println("Invalid Choice");
+                }
             }
 
         }
