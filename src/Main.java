@@ -1,7 +1,6 @@
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Main {
@@ -13,9 +12,17 @@ public class Main {
 
         try(AudioInputStream audioStream = AudioSystem.getAudioInputStream(file)){
 
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Audio file not found!");
         }
         catch(UnsupportedAudioFileException e){
             System.out.println("Audio file isn't supported! Please choose 'wav', '.au' or '.aiff'");
+        }
+        catch (LineUnavailableException e){
+            System.out.println("Audio resource is unable to be accessed!");
         }
         catch(IOException e){
             System.out.println("Something went wrong!");
