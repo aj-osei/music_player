@@ -19,10 +19,18 @@ public class Main {
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
 
+            clip.start();
+
             String response = "";
 
             while(!response.equals("Q")){
                 System.out.println("P = Play");
+                System.out.println("S = Stop");
+                System.out.println("R = Resume");
+                System.out.println("Q = Quit");
+                System.out.print("Enter your choice: ");
+
+                response = scanner.next().toUpperCase();
             }
 
         }
@@ -40,7 +48,6 @@ public class Main {
         }
         finally{
             System.out.println("Bye!");
-            scanner.close();
         }
     }
 }
